@@ -23,12 +23,12 @@ export default {
   },
   methods: {
     getTweets() {
-      fetch('http://localhost:1337/tweets')
+      fetch('api/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
     },
     createTweet() {
-      fetch('http://localhost:1337/tweets', {
+      fetch('api/tweets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ text: this.text }),
