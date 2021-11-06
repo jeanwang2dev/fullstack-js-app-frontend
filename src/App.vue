@@ -1,25 +1,19 @@
 <template>
   <div class="container">
     <Header title="Tweets Tacker" />
-    <!-- create a tweet -->
-    <form @submit.prevent="createTweet">
-      <input type="text" v-model="text"/>
-      <button type="submit">Create</button>
-    </form>
-    <!-- show off all tweets -->
-    <div v-for="tweet in tweets" :key = "tweet">
-        {{ tweet.text }}
-    </div>
+    <Tweets :tweets="tweets" />
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
+import Tweets from './components/Tweets'
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Tweets
   },
   data() {
     return {
