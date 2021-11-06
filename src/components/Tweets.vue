@@ -1,14 +1,19 @@
 <template>
-    <div :key="tweet"  v-for="tweet in tweets">
-        <h3>{{ tweet.text }}</h3>
+    <div :key="tweet.id"  v-for="tweet in tweets">
+        <Tweet :tweet="tweet"/>
     </div>
 </template>
 
 <script>
+import Tweet from './Tweet'
+
 export default {
     name: 'Tweets',
     props: {
         tweets: Array
+    },
+    components: {
+        Tweet
     }
 }
 </script>
