@@ -1,7 +1,8 @@
 <template>
     <div :class="[ gender == 'female' ? 'female' : 'male', 'tweet' ]">
         <h3>{{ tweet.text }}
-            <i class="fas fa-times-circle"></i>
+            <i @click="onDelete(tweet._id)"
+               class="fas fa-times-circle"></i>
         </h3>
         <p>{{ fname }} {{ lname }}</p>
         <p>{{ location }}</p>
@@ -24,6 +25,10 @@ export default {
         tweet: Object
     },
     methods: {
+        onDelete(id){
+            //console.log("deleting tweet that has the id: " + id);
+            this.$emit('delete-tweet', id)
+        },
         async getUsers(){
             const res = await fetch('https://randomuser.me/api');
             const { results } = await res.json(); 
@@ -44,11 +49,13 @@ export default {
 .fas {
   color: red;
 }
+.fas:hover {
+    cursor: pointer;
+}
 .tweet {
   background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
-  cursor: pointer;
 }
 .tweet.male {
   border-left: 5px solid steelblue;

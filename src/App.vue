@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Tweets Tacker" />
-    <Tweets :tweets="tweets" />
+    <Tweets @delete-tweet="deleteTweet" :tweets="tweets" />
   </div>
 </template>
 
@@ -36,11 +36,15 @@ export default {
         this.text = '';
         this.getTweets();
       });
+    },
+    deleteTweet(id) {
+      console.log('tweet', id);
     }
   },
   mounted(){
     this.getTweets();
   },
+
 }
 </script>
 

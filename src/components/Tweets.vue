@@ -1,6 +1,7 @@
 <template>
-    <div :key="tweet.id"  v-for="tweet in tweets">
-        <Tweet :tweet="tweet"/>
+    <div :key="tweet._id"  v-for="tweet in tweets">
+        <Tweet @delete-tweet="$emit('delete-tweet', tweet._id)" 
+               :tweet="tweet"/>
     </div>
 </template>
 
@@ -14,6 +15,7 @@ export default {
     },
     components: {
         Tweet
-    }
+    },
+    emits: ['delete-tweet', ],
 }
 </script>
