@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <Header title="Tweets Tacker" />
-    <Tweets @delete-tweet="deleteTweet" :tweets="tweets" />
+    <Tweets @toggle-read="toggleRead"
+            @delete-tweet="deleteTweet" :tweets="tweets" />
   </div>
 </template>
 
@@ -22,8 +23,24 @@ export default {
     };
   },
   methods: {
-    getTweets() {
-      fetch('api/tweets')
+    async toggleRead(id) {
+      console.log('toggle ', id);
+      // const tweetToToggle = await this.fetchTweet(id)
+      // const updTweet = { ...tweetToToggle, read: !tweetToToggle.read }
+      // const res = await fetch(`api/tweets/${id}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify(updTweet),
+      // })
+      // const data = await res.json()
+      this.tweets = this.tweets.map((tweet) =>
+        tweet._id === id ? { ...tweet, read: !tweet.read } : tweet
+      )
+    },
+    async getTweets() {
+      await fetch('api/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
     },
@@ -37,9 +54,22 @@ export default {
         this.getTweets();
       });
     },
-    deleteTweet(id) {
-      console.log('tweet', id);
-    }
+    async deleteTweet(id) {
+      if (confirm('Are you sure to delete this tweet?')) {
+        const res = await fetch(`api/tweets/${id}`, {
+          method: 'DELETE',
+        })
+
+        res.status === 200
+          ? (this.tweets = this.tweets.filter((tweet) => tweet._id !== id))
+          : alert('Error deleting task')
+      }
+    },
+    async fetchTweet(id) {
+      const res = await fetch(`api/tweets/${id}`)
+      const data = await res.json()
+      return data
+    },
   },
   mounted(){
     this.getTweets();

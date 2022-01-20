@@ -1,13 +1,16 @@
 <template>
-    <div :class="[ gender == 'female' ? 'female' : 'male', 'tweet' ]">
-        <h3>{{ tweet.text }}
-            <i @click="onDelete(tweet._id)"
-               class="fas fa-times-circle"></i>
-        </h3>
+    <div @dblclick="$emit('toggle-read', tweet_id)" 
+         :class="[ gender == 'female' ? 'female' : 'male', tweet.read ? '' : 'unread', 'tweet' ]">
+      <div class="left">
+        <h3>{{ tweet.text }}</h3>
         <p>{{ fname }} {{ lname }}</p>
         <p>{{ location }}</p>
+      </div>
+      <div class="right">
+        <i @click="$emit('delete-tweet', tweet_id)"
+               class="fas fa-times-circle"></i>
+      </div>
     </div>
-    
 </template>
 
 <script>
@@ -25,10 +28,10 @@ export default {
         tweet: Object
     },
     methods: {
-        onDelete(id){
-            //console.log("deleting tweet that has the id: " + id);
-            this.$emit('delete-tweet', id)
-        },
+        // onDelete(id){
+        //     //console.log("deleting tweet that has the id: " + id);
+        //     this.$emit('delete-tweet', id)
+        // },
         async getUsers(){
             const res = await fetch('https://randomuser.me/api');
             const { results } = await res.json(); 
@@ -53,19 +56,24 @@ export default {
     cursor: pointer;
 }
 .tweet {
-  background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
 }
+.tweet.unread {
+  border-left: 5px solid #092beb;
+}
 .tweet.male {
-  border-left: 5px solid steelblue;
+  background: rgb(125, 160, 189);
 }
 .tweet.female {
-  border-left: 5px solid pink;
+  background: rgb(219, 188, 193);
 }
-.tweet h3 {
+.tweet {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.tweet .left h3:hover {
+  cursor: pointer;
 }
 </style>
