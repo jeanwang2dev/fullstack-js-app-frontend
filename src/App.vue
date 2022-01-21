@@ -55,15 +55,15 @@ export default {
         .then( data => (this.tweets = data.tweets) );
     },
     createTweet(tweet) {
-      this.tweets = [... this.tweets, tweet]
-      // fetch('api/tweets', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json'},
-      //   body: JSON.stringify({ text: this.text }),
-      // }).then( () => {
-      //   this.text = '';
-      //   this.getTweets();
-      // });
+      //this.tweets = [... this.tweets, tweet]
+      fetch('api/tweets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ text: tweet.text }),
+      }).then( () => {
+        this.text = '';
+        this.getTweets();
+      });
     },
     async deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
