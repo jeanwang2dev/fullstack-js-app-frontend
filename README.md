@@ -5,6 +5,8 @@
 * related Links: 
   * [Making a Node + MongoDB App on DigitalOcean](https://www.youtube.com/watch?v=1171ScSfIrs&t=1862s)
   * [Making Fullstack JavaScript Apps](https://www.youtube.com/watch?v=C2AyOoZa5Yc)
+  * [Vue Js Crash course video](https://www.youtube.com/watch?v=qZXt1Aom3Cs&t=2701s)
+  * [Vue Js Crash course github](https://github.com/bradtraversy/vue-crash-2021)
 
 ### Create a Managed MongoDB Database on Digital Ocean
 

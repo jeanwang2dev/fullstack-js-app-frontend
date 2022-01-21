@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Tweets Tacker" />
+    <CreateTweet />
     <Tweets @toggle-read="toggleRead"
             @delete-tweet="deleteTweet" :tweets="tweets" />
   </div>
@@ -9,16 +10,19 @@
 <script>
 import Header from './components/Header'
 import Tweets from './components/Tweets'
+import CreateTweet from './components/CreateTweet.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Tweets
+    Tweets,
+    CreateTweet,
   },
   data() {
     return {
       text: '',
+      date: '',
       tweets: []
     };
   },

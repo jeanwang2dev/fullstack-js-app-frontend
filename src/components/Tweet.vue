@@ -3,6 +3,7 @@
          :class="[ gender == 'female' ? 'female' : 'male', tweet.read ? '' : 'unread', 'tweet' ]">
       <div class="left">
         <h3>{{ tweet.text }}</h3>
+        <h6><i>{{ formatDate(tweet.date) }}</i></h6>
         <p>{{ fname }} {{ lname }}</p>
         <p>{{ location }}</p>
       </div>
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+import formatDateMixin from '../mixins/formatDateMixin';
+
 export default {
     name: 'Tweet',
     data(){
@@ -22,6 +25,12 @@ export default {
            lname: '',
            location: '',
            gender: '',
+        }
+    },
+    mixins: [formatDateMixin],
+    computed: {
+        formattedDate() {
+            return this.formatDate(this.date);
         }
     },
     props: {
