@@ -28,11 +28,6 @@ export default {
         }
     },
     mixins: [formatDateMixin],
-    computed: {
-        formattedDate() {
-            return this.formatDate(this.date);
-        }
-    },
     props: {
         tweet: Object
     },

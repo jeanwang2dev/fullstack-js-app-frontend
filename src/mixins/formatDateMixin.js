@@ -1,9 +1,11 @@
+import dayjs from 'dayjs';
+
 export default {
     methods: {
         formatDate(dateString) {
-            const date = new Date(dateString);
+            const date = dayjs(dateString);
                 // Then specify how you want your dates to be formatted
-            return new Intl.DateTimeFormat('default', {dateStyle: 'long'}).format(date);
+            return date.format('dddd, MMMM D, YYYY h:mm A');
         }
     }
 }
