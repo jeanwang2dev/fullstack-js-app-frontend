@@ -33,7 +33,7 @@ export default {
     toggleCreateTweet() {
       this.showCreateTweet = !this.showCreateTweet
     },
-    async toggleRead(id) {
+    toggleRead(id) {
       console.log('toggle ', id);
       // const tweetToToggle = await this.fetchTweet(id)
       // const updTweet = { ...tweetToToggle, read: !tweetToToggle.read }
@@ -49,25 +49,26 @@ export default {
         tweet._id === id ? { ...tweet, read: !tweet.read } : tweet
       )
     },
-    async getTweets() {
-      await fetch('api/tweets')
+    getTweets() {
+      fetch('api/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
+      console.log(this.tweets)
     },
     createTweet(tweet) {
-      //this.tweets = [... this.tweets, tweet]
-      fetch('api/tweets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ text: tweet.text }),
-      }).then( () => {
-        this.text = '';
-        this.getTweets();
-      });
+      this.tweets = [... this.tweets, tweet]
+      // await fetch('api/tweets', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json'},
+      //   body: JSON.stringify({ text: tweet.text }),
+      // }).then( () => {
+      //   this.text = '';
+      //   this.getTweets();
+      // });
     },
-    async deleteTweet(id) {
+    deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
-        const res = await fetch(`api/tweets/${id}`, {
+        const res = fetch(`api/tweets/${id}`, {
           method: 'DELETE',
         })
 
@@ -76,9 +77,9 @@ export default {
           : alert('Error deleting task')
       }
     },
-    async fetchTweet(id) {
-      const res = await fetch(`api/tweets/${id}`)
-      const data = await res.json()
+    fetchTweet(id) {
+      const res = fetch(`api/tweets/${id}`)
+      const data = res.json()
       return data
     },
   },

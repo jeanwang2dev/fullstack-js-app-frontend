@@ -39,7 +39,7 @@ export default {
         async getUsers(){
             const res = await fetch('https://randomuser.me/api');
             const { results } = await res.json(); 
-            //console.log( results );
+            console.log( results );
             this.fname = results[0].name.first;   
             this.lname = results[0].name.last;
             this.location = results[0].location.country;
