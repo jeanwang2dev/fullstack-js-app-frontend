@@ -1,7 +1,9 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <Button btnText="Add Tweet" color="green" />
+        <Button @btn-click="$emit('toggle-create-tweet')" 
+                :btnText="showCreateTweet ? 'Close' : 'Create Tweet' "
+                :color="showCreateTweet ? 'red' : 'green' " />
     </header>
 </template>
 
@@ -14,7 +16,8 @@ export default {
        title: {
            type: String,
            default: 'App Name'
-       }
+       },
+       showCreateTweet: Boolean
    },
    components: {
        Button,

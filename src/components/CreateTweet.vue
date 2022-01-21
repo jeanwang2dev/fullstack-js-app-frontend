@@ -4,13 +4,37 @@
       <label>Tweet</label>
       <input type="text" v-model="text" name="text" placeholder="Create Tweet" />
     </div>
-    <input type="submit" value="Save Task" class="btn btn-block" />
+    <input type="submit" value="Save Tweet" class="btn btn-block" />
   </form>
 </template>
 
 <script>
 export default {
   name: 'CreateTweet',
+  data(){
+    return {
+      text: '',
+      read: false
+    }
+  },
+  methods: {
+    onSubmit(e){
+      e.preventDefault()
+      if(!this.text) {
+        alert('Please add a tweet')
+        return
+      }
+
+      const newTweet = {
+        text: this.text,
+      }
+
+      this.$emit('add-tweet', newTweet)
+
+      this.text = ''
+
+    }
+  }
 }
 </script>
 

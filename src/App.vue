@@ -1,7 +1,11 @@
 <template>
   <div class="container">
-    <Header title="Tweets Tacker" />
-    <CreateTweet />
+    <Header @toggle-create-tweet="toggleCreateTweet" 
+            title="Tweets Tacker" 
+            :showCreateTweet="showCreateTweet" />
+    <div v-show="showCreateTweet">
+      <CreateTweet @add-tweet="createTweet"/>
+    </div>
     <Tweets @toggle-read="toggleRead"
             @delete-tweet="deleteTweet" :tweets="tweets" />
   </div>
@@ -21,12 +25,14 @@ export default {
   },
   data() {
     return {
-      text: '',
-      date: '',
-      tweets: []
+      tweets: [],
+      showCreateTweet: false
     };
   },
   methods: {
+    toggleCreateTweet() {
+      this.showCreateTweet = !this.showCreateTweet
+    },
     async toggleRead(id) {
       console.log('toggle ', id);
       // const tweetToToggle = await this.fetchTweet(id)
@@ -48,15 +54,16 @@ export default {
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
     },
-    createTweet() {
-      fetch('api/tweets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ text: this.text }),
-      }).then( () => {
-        this.text = '';
-        this.getTweets();
-      });
+    createTweet(tweet) {
+      this.tweets = [... this.tweets, tweet]
+      // fetch('api/tweets', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json'},
+      //   body: JSON.stringify({ text: this.text }),
+      // }).then( () => {
+      //   this.text = '';
+      //   this.getTweets();
+      // });
     },
     async deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
