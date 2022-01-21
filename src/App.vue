@@ -49,11 +49,13 @@ export default {
         tweet._id === id ? { ...tweet, read: !tweet.read } : tweet
       )
     },
-    getTweets() {
-      fetch('api/tweets')
+    async getTweets() {
+      await fetch('api/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
+      console.log("hello...")
       console.log(this.tweets)
+      console.log("end...")
     },
     createTweet(tweet) {
       this.tweets = [... this.tweets, tweet]
