@@ -55,6 +55,11 @@ export default {
         .then( data => (this.tweets = data.tweets) );
       console.log(this.tweets)
     },
+    async fetchTweet(id) {
+      const res = await fetch(`api/tweets/${id}`)
+      const data = await res.json()
+      return data
+    },
     async createTweet(tweet) {
       this.tweets = [... this.tweets, tweet]
       await fetch('api/tweets', {
@@ -66,9 +71,9 @@ export default {
         this.getTweets();
       });
     },
-    deleteTweet(id) {
+    async deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
-        const res = fetch(`api/tweets/${id}`, {
+        const res = await fetch(`api/tweets/${id}`, {
           method: 'DELETE',
         })
 
@@ -77,11 +82,7 @@ export default {
           : alert('Error deleting task')
       }
     },
-    fetchTweet(id) {
-      const res = fetch(`api/tweets/${id}`)
-      const data = res.json()
-      return data
-    },
+
   },
   mounted(){
     this.getTweets();
