@@ -50,12 +50,10 @@ export default {
       )
     },
     async getTweets() {
-      await fetch('api/tweets')
+      await fetch('https://nodejs-tweets-app.herokuapp.com/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
-      console.log("hello...")
       console.log(this.tweets)
-      console.log("end...")
     },
     createTweet(tweet) {
       this.tweets = [... this.tweets, tweet]
