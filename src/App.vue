@@ -50,21 +50,21 @@ export default {
       )
     },
     async getTweets() {
-      await fetch('https://nodejs-tweets-app.herokuapp.com/tweets')
+      await fetch('api/tweets')
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
       console.log(this.tweets)
     },
-    createTweet(tweet) {
+    async createTweet(tweet) {
       this.tweets = [... this.tweets, tweet]
-      // await fetch('api/tweets', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json'},
-      //   body: JSON.stringify({ text: tweet.text }),
-      // }).then( () => {
-      //   this.text = '';
-      //   this.getTweets();
-      // });
+      await fetch('api/tweets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ text: tweet.text }),
+      }).then( () => {
+        this.text = '';
+        this.getTweets();
+      });
     },
     deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
