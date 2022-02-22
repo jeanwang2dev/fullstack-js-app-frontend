@@ -15,6 +15,8 @@
 import Header from './components/Header'
 import Tweets from './components/Tweets'
 import CreateTweet from './components/CreateTweet.vue'
+const backendUrl = 'https://nodejs-tweets-app.herokuapp.com/tweets/'
+//const backendUrl = 'api/tweets/';
 
 export default {
   name: 'App',
@@ -50,30 +52,34 @@ export default {
       )
     },
     async getTweets() {
-      await fetch('api/tweets')
+      await fetch(backendUrl)
         .then( res => res.json() )
         .then( data => (this.tweets = data.tweets) );
       console.log(this.tweets)
     },
     async fetchTweet(id) {
-      const res = await fetch(`api/tweets/${id}`)
+      const res = await fetch( backendUrl + id)
       const data = await res.json()
       return data
     },
     async createTweet(tweet) {
-      this.tweets = [... this.tweets, tweet]
-      await fetch('api/tweets', {
+      //const res = await fetch(backendUrl, {
+      await fetch(backendUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ text: tweet.text }),
-      }).then( () => {
-        this.text = '';
-        this.getTweets();
-      });
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(tweet),
+      })
+      //const data = await res.json()
+      //console.log(data["tweet"]["insertedId"])
+      //console.log("data: " + JSON.stringify(data));
+      this.tweets = [... this.tweets, tweet]
     },
     async deleteTweet(id) {
       if (confirm('Are you sure to delete this tweet?')) {
-        const res = await fetch(`api/tweets/${id}`, {
+        //const res = await fetch(`api/tweets/${id}`, {
+        const res = await fetch( backendUrl + id, {
           method: 'DELETE',
         })
 
@@ -112,7 +118,7 @@ body {
 }
 .btn {
   display: inline-block;
-  background: #000;
+  background: green;
   color: #fff;
   border: none;
   padding: 10px 20px;
