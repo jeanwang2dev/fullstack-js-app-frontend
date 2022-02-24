@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header @toggle-create-tweet="toggleCreateTweet" 
-            title="Tweets Tacker Update" 
+            title="Tweets Tacker Test!!" 
             :showCreateTweet="showCreateTweet" />
     <div v-show="showCreateTweet">
       <CreateTweet @add-tweet="createTweet"/>
