@@ -2,7 +2,7 @@
       <form @submit="onSubmit" class="add-form">
     <div class="form-control">
       <label>Tweet</label>
-      <input type="text" v-model="text" name="text" placeholder="Create Tweet" />
+      <input type="text" v-model="text" name="text" placeholder="Create A Tweet" />
     </div>
     <div class="form-control form-control-group">
       <input type="text" v-model="fname" name="fname" placeholder="First Name" />
