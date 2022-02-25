@@ -14,7 +14,7 @@
       <input type="radio" id="male" value="male" name="gender" v-model="gender">
       <label for="male">male</label>
     </div>
-    <input type="submit" value="Save Tweet" class="btn btn-block" />
+    <input type="submit" value="Save Your Tweet" class="btn btn-block" />
   </form>
 </template>
 
