@@ -19,7 +19,17 @@
 
 ### Setup the Frontend
 
-## GCP Cloud Build pipeline setup
+## Deply this Github repo to GCP with Cloud Build, setup CI/CD pipeline 
+
+ 1. Create a project (this one, the vue project)
+ 2. Add YAML files for the setup (the app.yaml and cloud.yaml in this project)
+ 3. Push the project to GitHub
+ 4. [Mirror the GitHub repository to Cloud Source Repositories](https://cloud.google.com/source-repositories/docs/mirroring-a-github-repository)
+ 5. Enable **Cloud Build API** and **App Engine Admin API** and **service accounts user role**
+ 6. Create an App Engine application
+ 7. Build trigger in Cloud Build
+
+ * This project lives on [link](https://ci-cd-learning-342316.appspot.com/) 
 
 ## Project setup (Default Vue project)
 ```

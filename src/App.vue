@@ -36,7 +36,7 @@ export default {
       this.showCreateTweet = !this.showCreateTweet
     },
     async toggleRead(id) {
-      console.log('toggle ', id);
+      // console.log('toggle ', id);
       const tweetToToggle = await this.fetchTweet(id);
       // console.log("before update: " + JSON.stringify(tweetToToggle));
       // console.log("read value: " + tweetToToggle["tweet"].read);
@@ -76,9 +76,10 @@ export default {
         },
         body: JSON.stringify(tweet),
       })
-      //const data = await res.json()
-      //console.log(data["tweet"]["insertedId"])
-      //console.log("data: " + JSON.stringify(data));
+      // const data = await res.json()
+      // const id = console.log(data["tweet"]["insertedId"])
+      // const tweetGotAdded = await this.fetchTweet(id);
+      // console.log("data: " + JSON.stringify(tweetGotAdded));
       this.tweets = [... this.tweets, tweet]
     },
     async deleteTweet(id) {
