@@ -35,18 +35,23 @@ export default {
     toggleCreateTweet() {
       this.showCreateTweet = !this.showCreateTweet
     },
-    toggleRead(id) {
+    async toggleRead(id) {
       console.log('toggle ', id);
-      // const tweetToToggle = await this.fetchTweet(id)
-      // const updTweet = { ...tweetToToggle, read: !tweetToToggle.read }
+      const tweetToToggle = await this.fetchTweet(id);
+      // console.log("before update: " + JSON.stringify(tweetToToggle));
+      // console.log("read value: " + tweetToToggle["tweet"].read);
+      const updTweet = { ...tweetToToggle["tweet"], read: !tweetToToggle["tweet"].read };
+      // console.log("after update: " + JSON.stringify(updTweet));
       // const res = await fetch(`api/tweets/${id}`, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify(updTweet),
-      // })
+      await fetch(backendUrl + id, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(updTweet),
+      })
       // const data = await res.json()
+      // console.log("updated: " + JSON.stringify(data))
       this.tweets = this.tweets.map((tweet) =>
         tweet._id === id ? { ...tweet, read: !tweet.read } : tweet
       )

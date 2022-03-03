@@ -2,7 +2,7 @@ module.exports = {
     devServer: {
         proxy: {
             '^/api': {
-                target: 'https://nodejs-tweets-app.herokuapp.com',
+                target: 'http://localhost:1337/',
                 changeOrigin: true,
                 logLevel: 'debug',
                 pathRewrite: { '^/api': '/' },
