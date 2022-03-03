@@ -19,6 +19,8 @@
 
 ### Setup the Frontend
 
+## GCP Cloud Build pipeline setup
+
 ## Project setup (Default Vue project)
 ```
 npm install
